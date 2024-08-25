@@ -10,10 +10,10 @@ app.post('/bfhl', (req, res) => {
 
     data.forEach(item => {
         if (!isNaN(item)) {
-            numbers.push(item);
+            numbers.push(Number(item)); // Ensure numbers are stored as actual numbers
         } else if (typeof item === 'string' && item.length === 1) {
             alphabets.push(item);
-            if (item === item.toLowerCase() && item > highestLowercaseAlphabet) {
+            if (item === item.toLowerCase() && item.localeCompare(highestLowercaseAlphabet) > 0) {
                 highestLowercaseAlphabet = item;
             }
         }
@@ -38,5 +38,5 @@ app.get('/bfhl', (req, res) => {
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
-    console.log(Server running on port ${port});
+    console.log(`Server running on port ${port}`);
 });
